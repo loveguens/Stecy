@@ -29,10 +29,12 @@
     }
 
     .corazon {
-      position: absolute;
-      color: #ff66a3;
-      pointer-events: none;
-      animation: flotar 1s ease-out forwards;
+     position: absolute;
+  color: #ff66a3;
+  pointer-events: none;
+  animation: flotar 1.2s ease-out forwards;
+  font-size: 60px; /* Tamaño más grande */
+  user-select: none;
     }
 
     @keyframes flotar {
@@ -41,7 +43,7 @@
         opacity: 1;
       }
       to {
-        transform: translateY(-100px) scale(1.5);
+        transform: translateY(-250px) scale(3.5);
         opacity: 0;
       }
     }
