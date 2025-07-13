@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Mi Amor 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color:white;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #d6006b;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      margin: 20px;
+      text-align: center;
+      z-index: 2;
+      transition: all 1s ease;
+    }
+
+    .corazon {
+      position: absolute;
+      color: #ff66a3;
+      pointer-events: none;
+      animation: flotar 1s ease-out forwards;
+    }
+
+    @keyframes flotar {
+      from {
+        transform: scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .emoji-fondo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .emoji-fondo span {
+      position: absolute;
+      font-size: 2rem;
+      animation: flotarEmoji 20s linear infinite;
+      opacity: 0.2;
+    }
+
+    @keyframes flotarEmoji {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(-150vh);
+      }
+    }
+
+    .fuegos-emojis {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .emoji-fuego {
+      position: absolute;
+      font-size: 2rem;
+      animation: explosion 2s ease-out forwards;
+    }
+
+    @keyframes explosion {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-300px) scale(1.5) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <h1 id="mensaje">Tenemos que comportarnos<br>como novios 💖</h1>
+
+  <div class="emoji-fondo" id="fondo"></div>
+  <div class="fuegos-emojis" id="fuegos"></div>
+
+  <script>
+    // Frases rotativas
+    const frases = [
+      "Quiero decir algo 💖",
+      "Somo novios 💕",
+      "y nuestro amor es real 😍",
+      "hay que vivirlo y compartirlo ✨",
+      "No estamos aquí para ser dos amigos cualquiera 💘",
+      "sino para construir algo especial 💑",
+      "Sabes bien lo que quiero 💗",
+      "conocerte más, cuidarte y hacerte feliz 💞",
+      "Te amor de verdad 🥰"
+    ];
+    let index = 0;
+    const mensaje = document.getElementById("mensaje");
+    setInterval(() => {
+      index = (index + 1) % frases.length;
+      mensaje.innerHTML = frases[index];
+    }, 5000);
+
+    // Corazones que siguen el cursor
+    document.addEventListener('mousemove', e => {
+      const corazon = document.createElement('div');
+      corazon.classList.add('corazon');
+      corazon.textContent = '💗';
+      corazon.style.left = e.pageX + 'px';
+      corazon.style.top = e.pageY + 'px';
+      corazon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      document.body.appendChild(corazon);
+      setTimeout(() => corazon.remove(), 1000);
+    });
+
+    // Fuegos artificiales con emojis
+    const contenedorFuegos = document.getElementById('fuegos');
+    const emojisFuego = ["🥰", "💝", "💞", "🥰", "💟", "🎊", "😍", "🤩", "💌", "💖", "❤", "💗"];
+
+    function lanzarEmojiFuego() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('emoji-fuego');
+      emoji.textContent = emojisFuego[Math.floor(Math.random() * emojisFuego.length)];
+      emoji.style.left = Math.random() * window.innerWidth + 'px';
+      emoji.style.top = window.innerHeight + 'px';
+      emoji.style.fontSize = (Math.random() * 30 + 20) + 'px';
+
+      contenedorFuegos.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 2000);
+    }
+
+    setInterval(lanzarEmojiFuego, 1000);
+
+    // Fondo con emojis flotando
+    const fondo = document.getElementById("fondo");
+    const emojisFondo = ['💖','💘','💝','💕','💞','💗','💓'];
+    for (let i = 0; i < 100; i++) {
+      const span = document.createElement("span");
+      span.innerText = emojisFondo[Math.floor(Math.random() * emojisFondo.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.top = Math.random() * 100 + "vh";
+      span.style.fontSize = Math.random() * 24 + 16 + "px";
+      span.style.animationDuration = Math.random() * 20 + 10 + "s";
+      fondo.appendChild(span);
+    }
+  </script>
+
+</body>
+</html>
