@@ -136,16 +136,26 @@
     }, 5000);
 
     // Corazones que siguen el cursor
-    document.addEventListener('mousemove', e => {
-      const corazon = document.createElement('div');
-      corazon.classList.add('corazon');
-      corazon.textContent = '💗';
-      corazon.style.left = e.pageX + 'px';
-      corazon.style.top = e.pageY + 'px';
-      corazon.style.fontSize = (Math.random() * 20 + 10) + 'px';
-      document.body.appendChild(corazon);
-      setTimeout(() => corazon.remove(), 1000);
-    });
+    function crearCorazon(x, y) {
+  const corazon = document.createElement('div');
+  corazon.classList.add('corazon');
+  corazon.textContent = '💖';
+  corazon.style.left = (x - 30) + 'px';
+  corazon.style.top = (y - 30) + 'px';
+  document.body.appendChild(corazon);
+  setTimeout(() => corazon.remove(), 1200);
+}
+
+// Para mouse
+document.addEventListener('mousemove', e => {
+  crearCorazon(e.pageX, e.pageY);
+});
+
+// Para toque móvil
+document.addEventListener('touchmove', e => {
+  const touch = e.touches[0];
+  crearCorazon(touch.pageX, touch.pageY);
+});
 
     // Fuegos artificiales con emojis
     const contenedorFuegos = document.getElementById('fuegos');
